@@ -10,6 +10,7 @@ import pagosRoutes from './routes/pagos.routes.js';
 import reclamosRoutes from './routes/reclamos.routes.js'
 import excepcionesRoutes from './routes/excepciones.routes.js'
 import basesRoutes from './routes/bases.routes.js'
+import agendadosRoutes from './routes/agendados.routes.js'
 
 
 const app = express();
@@ -49,5 +50,6 @@ app.use('/', pagosRoutes);
 app.use('/', reclamosRoutes);
 app.use('/', excepcionesRoutes);
 app.use('/', basesRoutes);
+app.use('/', agendadosRoutes);
 
 export default app;
