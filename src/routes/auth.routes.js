@@ -10,6 +10,9 @@ router.get('/verificacion',verifyUser,(req, res) =>{
 
 
 router.post('/login' , authCtrl.login);
+//Para mostrarEmpleado
+router.post('/mostrarEmpleado' , authCtrl.mostrarEmpleado);
 router.get('/logout' , authCtrl.logout);
 router.get('/verificacion', authCtrl.verificar);
+
 export default  router;

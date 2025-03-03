@@ -11,6 +11,7 @@ import reclamosRoutes from './routes/reclamos.routes.js'
 import excepcionesRoutes from './routes/excepciones.routes.js'
 import basesRoutes from './routes/bases.routes.js'
 import agendadosRoutes from './routes/agendados.routes.js'
+import incidenciasRoutes from './routes/incidencia.routes.js'
 
 
 const app = express();
@@ -51,5 +52,6 @@ app.use('/', reclamosRoutes);
 app.use('/', excepcionesRoutes);
 app.use('/', basesRoutes);
 app.use('/', agendadosRoutes);
+app.use('/', incidenciasRoutes);
 
 export default app;
