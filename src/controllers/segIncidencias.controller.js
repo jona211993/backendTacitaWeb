@@ -80,3 +80,40 @@ export const ingresarNuevaSolucion = async (req, res) => {
     } 
   } 
   
+// PARA INGRESAR EL NUEVO SEGUIMIENTO DE INCIDENCIA
+export const ingresarNuevaSegmientoIncidencia = async (req, res) => {
+    let pool;
+    try {
+        const { idgestor, num_incidencia, estado , agente, observacion, supervisor, idSolucion } = req.body;
+
+        if (!idgestor || !num_incidencia || !estado|| !agente|| !observacion|| !supervisor|| !idSolucion) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Todos los campos son obligatorios" 
+            });
+        }
+        pool = await getConnection();
+        const result = await pool.request()
+            .input("idgestor", idgestor) // Se evitan inyecciones SQL
+            .input("num_incidencia", num_incidencia)
+            .input("estado", estado) // Se evitan inyecciones SQL
+            .input("agente", agente)
+            .input("observacion", observacion) // Se evitan inyecciones SQL
+            .input("supervisor", supervisor)
+            .input("idSolucion", idSolucion) // Se evitan inyecciones SQL
+            .execute("app.usp_ingresarSeguimiento"); // Llamada segura al procedimiento almacenado
+
+        res.json({ 
+            success: true, 
+            message: "Nuevo seguimiento incidencia registrado correctamente", 
+            data: result.recordset 
+        });
+    } catch (error) {
+        console.error("Error al ejecutar el procedimiento almacenado:", error);
+        res.status(500).json({ 
+            success: false, 
+            message: "Error al registrar un nuevo seg. Incidencia" 
+        });
+    } 
+  } 
+  
