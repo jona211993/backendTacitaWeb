@@ -47,5 +47,36 @@ export const getListaSolucionSeg = async (req, res) => {
     }
   }
 };
+// PARA INGRESAR UN NUEVA SOLUCION a LA LISTA
+export const ingresarNuevaSolucion = async (req, res) => {
+    let pool;
+    try {
+        const { descripcion, usuario } = req.body;
 
+        if (!descripcion || !usuario) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Todos los campos son obligatorios" 
+            });
+        }
 
+        pool = await getConnection();
+        const result = await pool.request()
+            .input("descripcion", descripcion) // Se evitan inyecciones SQL
+            .input("usuario", usuario)
+            .execute("app.usp_ingresarSolucionSeg"); // Llamada segura al procedimiento almacenado
+
+        res.json({ 
+            success: true, 
+            message: "Nueva solución registrada correctamente", 
+            data: result.recordset 
+        });
+    } catch (error) {
+        console.error("Error al ejecutar el procedimiento almacenado:", error);
+        res.status(500).json({ 
+            success: false, 
+            message: "Error al registrar una solución en seg. Incidencia" 
+        });
+    } 
+  } 
+  

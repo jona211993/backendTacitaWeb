@@ -5,6 +5,7 @@ const router = Router();
 
 
 router.get('/obtenerListaSolucionSeguimientoIncidencia',segIncidenciasCtrl.getListaSolucionSeg);
+router.post('/ingresarSolucionSeguimientoIncidencia',segIncidenciasCtrl.ingresarNuevaSolucion);
 
 
 
