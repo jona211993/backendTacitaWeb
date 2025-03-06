@@ -13,6 +13,7 @@ import basesRoutes from './routes/bases.routes.js'
 import agendadosRoutes from './routes/agendados.routes.js'
 import incidenciasRoutes from './routes/incidencia.routes.js'
 import segIncidenciasRoutes from './routes/segIncidencias.routes.js'
+import baseDocumentosRoutes from './routes/baseDocumentos.routes.js'
 
 
 const app = express();
@@ -55,5 +56,6 @@ app.use('/', basesRoutes);
 app.use('/', agendadosRoutes);
 app.use('/', incidenciasRoutes);
 app.use('/', segIncidenciasRoutes);
+app.use('/', baseDocumentosRoutes);
 
 export default app;
