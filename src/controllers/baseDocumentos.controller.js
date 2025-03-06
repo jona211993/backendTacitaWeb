@@ -71,3 +71,37 @@ export const getListaDocumentosGenerados = async (req, res) => {
       }
     }
   };
+
+export const buscarPorCodigoIDC = async (req, res) => {
+    let pool;
+    const {documento,usuario}= req.body;
+    try {
+      const sql = `EXEC app.usp_ListaDocumentosxCodigoIDC '${documento}' , '${usuario}'`;
+      pool = await getConnection();
+      const result = await pool.request().query(sql);
+  
+      const listaDocumentosPorCodigoIDC = result.recordsets.length; // ✅ Corrección de "length"
+  
+      console.log("Resultado:", result.recordsets);
+  
+      if (listaDocumentosPorCodigoIDC > 0) {
+        pool.close();
+        return res.status(200).json({ status: 200, data: result.recordsets[0] });
+      } else {
+        pool.close();
+        return res.status(404).json({
+          status: 400,
+          error: "No se encontraron la lista  buscada por codigo IDC",
+        });
+      }
+    } catch (error) {
+      console.error("Error en lista de documentos buscados por codigo IDC :", error);
+      return res
+        .status(500)
+        .json({ error: "Error interno del servidor: " + error.message });
+    } finally {
+      if (pool) {
+        pool.close();
+      }
+    }
+  };
