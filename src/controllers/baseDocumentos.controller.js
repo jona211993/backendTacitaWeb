@@ -113,7 +113,7 @@ export const getListaDetalleDocumentoPorID= async (req, res) => {
   try {
    let idCarta2 = parseInt(idCarta, 10);
  
-    const sql = `EXEC app.usp_ListaDetalleDocumentoXID ${idCarta2} , '${tipo}'`;
+    const sql = `EXECUTE app.usp_ListaDetalleDocumentoXID ${idCarta2} , '${tipo}'`;
     pool = await getConnection();
     const result = await pool.request().query(sql);
 
