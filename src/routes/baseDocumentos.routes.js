@@ -6,6 +6,7 @@ const router = Router();
 
 router.get('/obtenerListaDocumentosPendientes',baseDocumentosCtrl.getListaDocumentosPendientes);
 router.get('/obtenerListaDocumentosGenerados',baseDocumentosCtrl.getListaDocumentosGenerados);
+router.get('/obtenerListaDetalle',baseDocumentosCtrl.getListaDetalleDocumentoPorID);
 router.post('/listaDocumentosPorCodigoIDC',baseDocumentosCtrl.buscarPorCodigoIDC);
 
 
